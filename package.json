@@ -1,0 +1,34 @@
+{
+  "name": "mimosa-eslint",
+  "version": "0.1.0",
+  "homepage": "http://www.mimosa.io",
+  "author": "David Bashford",
+  "description": "A ESLint module for Mimosa",
+  "contributors": [
+    {
+      "name": "David Bashford",
+      "email": "dbashford@hotmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dbashford/mimosa-eslint"
+  },
+  "keywords": [
+    "mimosa",
+    "mmodule",
+    "jshint",
+    "eslint",
+    "hint",
+    "lint"
+  ],
+  "dependencies": {
+    "eslint": "0.4.0",
+    "lodash": "2.4.1"
+  },
+  "main": "./src/index",
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10"
+  }
+}
