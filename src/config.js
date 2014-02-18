@@ -69,7 +69,7 @@ exports.validate = function ( config, validators ) {
               errors.push( "eslint.options file does not contain an object" );
             }
           } catch ( err ) {
-            errors.push( "Could not load eslint.options, " + err);
+            errors.push( "Could not load eslint.options, " + err );
           }
         }
       } else {
@@ -79,10 +79,10 @@ exports.validate = function ( config, validators ) {
       }
 
       if ( errors.length === 0 ) {
-        var validKeys = ["gloabls", "env", "rules"];
+        var validKeys = [ "globals", "env", "rules" ];
         Object.keys( es.options ).forEach( function( eslintKey ) {
           if ( validKeys.indexOf( eslintKey ) === -1 ){
-            errors.push( "eslint.options contains invalid key " + eslintKey + ". Valid keys are " + validKeys.join(", ") );
+            errors.push( "eslint.options contains invalid key " + eslintKey + ". Valid keys are " + validKeys.join( ", " ) );
           }
         });
       }
@@ -91,7 +91,7 @@ exports.validate = function ( config, validators ) {
 
   if ( errors.length === 0 ) {
     var eConfig = new Config();
-    es.options = util.mergeConfigs( eConfig.baseConfig, es.options || {});
+    es.options = util.mergeConfigs( eConfig.baseConfig, es.options || {} );
   }
 
   return errors;
