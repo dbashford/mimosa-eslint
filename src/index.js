@@ -1,10 +1,12 @@
 "use strict";
 
 var path = require( 'path' )
-  , eslint = require('eslint').cli
+  // , eslint = require('eslint').cli
+  , linter = require('eslint').linter
   , logger = null
-  , config = require('./config');
+  , moduleConfig = require('./config');
 
+/*
 var _eslint = function( opts, src ) {
   var args = [ '', '' ];
 
@@ -21,6 +23,22 @@ var _eslint = function( opts, src ) {
   }
 
   eslint.execute( args.concat( src ) );
+};
+*/
+
+var _eslintNext = function( eslintConfig, src, filePath ) {
+  var results = linter.verify( src.replace( /^#![^\r\n]+[\r\n]/, "" ), eslintConfig.options, false );
+  if ( results ) {
+    var resultsObj = {
+      messages: results,
+      filePath: filePath
+    };
+
+    var output = eslintConfig.formatter( [ resultsObj ], eslintConfig.options );
+    if ( output ) {
+      console.log( output );
+    }
+  }
 };
 
 var _process = function (mimosaConfig, options, next) {
@@ -43,7 +61,8 @@ var _process = function (mimosaConfig, options, next) {
             logger.debug( "Not ESLinting vendor script [[ " + fileName + " ]]" );
           }
         } else {
-          _eslint( mimosaConfig.eslint.options, file.outputFileName );
+          //_eslint( mimosaConfig.eslint.options, file.outputFileName );
+          _eslintNext( mimosaConfig.eslint, file.outputFileText, file.inputFileName );
         }
       }
 
@@ -55,16 +74,13 @@ var _process = function (mimosaConfig, options, next) {
 
 var registration = function (config, register) {
   logger = config.log;
-  register(
-    ['buildFile','add','update'],
-    'afterWrite',
-    _process,
-    config.extensions.javascript );
+  // register( ['buildFile','add','update'], 'afterWrite', _process, config.extensions.javascript );
+  register( ['buildFile','add','update'], 'afterCompile', _process, config.extensions.javascript );
 };
 
 module.exports = {
   registration: registration,
-  defaults: config.defaults,
-  placeholder: config.placeholder,
-  validate: config.validate
+  defaults: moduleConfig.defaults,
+  placeholder: moduleConfig.placeholder,
+  validate: moduleConfig.validate
 };

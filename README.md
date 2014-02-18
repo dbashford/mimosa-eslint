@@ -21,17 +21,14 @@ This module will run the ESLint static analysis tool over your JavaScript code d
 eslint: {
   exclude: [],
   vendor: false,
-  options: {
-    config: "eslint.json",
-    rulesdir: null,
-    format: "stylish",
-  }
+  rulesdir: null,
+  format: "stylish",
+  options: {}
 }
 ```
 
 * `exclude`: array of strings or regexes that match files to not eslint, strings are paths that can be relative to the `watch.sourceDir` or absolute.
 * `vendor`: whether or not to ESLint vendor code
-* `options`: the options object represents pass-through settings to the ESLint compiler
-* `config`: Path to your ESLint configuration file. The default ESLint configuration can be found [in the ESLint GH](https://github.com/eslint/eslint/blob/master/conf/eslint.json). The default path of `eslint.json` does not need to exist.  It is however the suggested name and location (in the root of your project) for your ESLint configuration.
 * `rulesdir`: path to a directory with custom rules to be added to the built-in rules that come with ESLint. The built-in rules can be found on the [ESLint website](http://eslint.org/docs/rules/). The source for those rules can be found [in the ESLint GH repo](https://github.com/eslint/eslint/tree/master/lib/rules).
 * `format`: A pass-through to ESLint's formatter setting. The formatter chosen effects how ESLint's output appears on the console. The default `stylish` is ESLint's default formatter.
+* `options`: This can be either a string or an object.  If a string it is a path to your ESLint configuration file. The default ESLint configuration can be found [in the ESLint GH](https://github.com/eslint/eslint/blob/master/conf/eslint.json). If an object it is the actual eslint configuration inlined in the mimosa-config.
