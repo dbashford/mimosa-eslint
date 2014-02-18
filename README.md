@@ -61,7 +61,7 @@ It includes turning on the `node` environment and updating some rules.  `no-glob
 
 ## Inline Config
 
-ESLint also lets you turn off warnings/errors with comments in your code.  That is also done [in the code of this module](https://github.com/dbashford/mimosa-eslint/blob/master/src/index.js#17).
+ESLint also lets you turn off warnings/errors with comments in your code.  That is also done [in the code of this module](https://github.com/dbashford/mimosa-eslint/blob/master/src/index.js#L17).
 
 ```javascript
 if ( output ) {
