@@ -2,8 +2,8 @@
 
 var path = require( "path" )
   , fs = require( "fs" )
-  , rules = require( 'eslint/lib/rules' )
-  , util = require( 'eslint/lib/util' )
+  , rules = require( "eslint/lib/rules" )
+  , util = require( "eslint/lib/util" )
   , Config = require( "eslint/lib/config" );
 
 exports.defaults = function() {
@@ -50,10 +50,10 @@ exports.validate = function ( config, validators ) {
 
       // set formatter into config for later use
       try {
-        es.formatter = require( 'eslint/lib/formatters/' + es.format );
+        es.formatter = require( "eslint/lib/formatters/" + es.format );
       } catch ( err ) {
         config.log.warn( "Could not resolve eslint formatter [[ " + es.format + " ]], defaulting to [[ stylish ]]" );
-        es.formatter = require( 'eslint/lib/formatters/stylish' );
+        es.formatter = require( "eslint/lib/formatters/stylish" );
       }
     }
 

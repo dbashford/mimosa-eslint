@@ -1,32 +1,9 @@
 "use strict";
 
-var path = require( 'path' )
-  // , eslint = require('eslint').cli
-  , linter = require('eslint').linter
-  , logger = null
-  , moduleConfig = require('./config');
+var linter = require( "eslint" ).linter
+  , moduleConfig = require( "./config" );
 
-/*
-var _eslint = function( opts, src ) {
-  var args = [ '', '' ];
-
-  if ( opts.config ) {
-    args.push( '--config', path.resolve( opts.config ) );
-  }
-
-  if ( opts.rulesdir ) {
-    args.push( '--rulesdir', opts.rulesdir );
-  }
-
-  if (opts.format) {
-    args.push( '--format', opts.format );
-  }
-
-  eslint.execute( args.concat( src ) );
-};
-*/
-
-var _eslintNext = function( eslintConfig, src, filePath ) {
+var _eslint = function( eslintConfig, src, filePath ) {
   var results = linter.verify( src.replace( /^#![^\r\n]+[\r\n]/, "" ), eslintConfig.options, false );
   if ( results ) {
     var resultsObj = {
@@ -36,36 +13,37 @@ var _eslintNext = function( eslintConfig, src, filePath ) {
 
     var output = eslintConfig.formatter( [ resultsObj ], eslintConfig.options );
     if ( output ) {
+      /* eslint no-console:0 */
       console.log( output );
     }
   }
 };
 
-var _process = function (mimosaConfig, options, next) {
+var _process = function ( mimosaConfig, options, next ) {
   if ( options.files && options.files.length ) {
+    var es = mimosaConfig.eslint;
+
     options.files.forEach( function( file ) {
       var outputText = file.outputFileText
         , fileName = file.inputFileName;
 
       if ( outputText && outputText.length > 0 ) {
-        if ( mimosaConfig.eslint.exclude && mimosaConfig.eslint.exclude.indexOf( fileName ) !== -1 ) {
-          if ( logger.isDebug() ) {
-            logger.debug( "Not ESLinting [[ " + file.inputFileName + " ]] because it has been excluded via string." );
+        if ( es.exclude && es.exclude.indexOf( fileName ) !== -1 ) {
+          if ( mimosaConfig.log.isDebug() ) {
+            mimosaConfig.log.debug( "Not ESLinting [[ " + file.inputFileName + " ]] because it has been excluded via string path." );
           }
-        } else if ( mimosaConfig.eslint.excludeRegex && fileName.match( mimosaConfig.eslint.excludeRegex ) ) {
-          if ( logger.isDebug() ) {
-            logger.debug( "Not ESLinting [[ " + file.inputFileName + " ]] because it has been excluded via regex." );
+        } else if ( es.excludeRegex && fileName.match( es.excludeRegex ) ) {
+          if ( mimosaConfig.log.isDebug() ) {
+            mimosaConfig.log.debug( "Not ESLinting [[ " + file.inputFileName + " ]] because it has been excluded via regex." );
           }
-        } else if ( options.isVendor && !mimosaConfig.eslint.vendor ) {
-          if ( logger.isDebug() ) {
-            logger.debug( "Not ESLinting vendor script [[ " + fileName + " ]]" );
+        } else if ( options.isVendor && !es.vendor ) {
+          if ( mimosaConfig.log.isDebug() ) {
+            mimosaConfig.log.debug( "Not ESLinting vendor script [[ " + fileName + " ]]" );
           }
         } else {
-          //_eslint( mimosaConfig.eslint.options, file.outputFileName );
-          _eslintNext( mimosaConfig.eslint, file.outputFileText, file.inputFileName );
+          _eslint( es, outputText, fileName );
         }
       }
-
     });
   }
 
@@ -73,9 +51,7 @@ var _process = function (mimosaConfig, options, next) {
 };
 
 var registration = function (config, register) {
-  logger = config.log;
-  // register( ['buildFile','add','update'], 'afterWrite', _process, config.extensions.javascript );
-  register( ['buildFile','add','update'], 'afterCompile', _process, config.extensions.javascript );
+  register( [ "buildFile", "add", "update"], "afterCompile", _process, config.extensions.javascript );
 };
 
 module.exports = {
