@@ -5,6 +5,7 @@ mimosa-eslint
 
 This is a ESLint module for the Mimosa build tool. It will perform static code analysis on your JavaScript code.
 
+For more information regarding ESLint, see http://eslint.org
 For more information regarding Mimosa, see http://mimosa.io
 
 ## Usage
@@ -14,9 +15,6 @@ Add `'eslint'` to your list of modules.  That's all!  Mimosa will install the mo
 ## Functionality
 
 This module will run the ESLint static analysis tool over your JavaScript code during `mimosa watch` and `mimosa build`.  This module provides ways to alter the ESLint configuration .
-
-## Example
-
 
 ## Default Config
 
