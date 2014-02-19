@@ -19,7 +19,7 @@ This module will run the ESLint static analysis tool over your JavaScript code d
 
 You can provide rule overrides directly through this module's configuration or with an external `.json` config file.
 
-This module lets ESLints own error formatters handle formatting the errors.  ESLint has several formatters to choose from the you can configure which you'd like this module to use.
+This module lets ESLint's own error formatters handle formatting the errors. ESLint has several formatters to choose from. You can configure which you'd like this module to use.
 
 ## Default Config
 
@@ -35,7 +35,7 @@ eslint: {
 
 * `exclude`: array of strings or regexes that match files to not eslint, strings are paths that can be relative to the `watch.sourceDir` or absolute.
 * `vendor`: whether or not to ESLint vendor code
-* `rulesdir`: path to a directory with custom rules to be added to the built-in rules that come with ESLint. The built-in rules can be found on the [ESLint website](http://eslint.org/docs/rules/). The source for those rules can be found [in the ESLint GH repo](https://github.com/eslint/eslint/tree/master/lib/rules).
+* `rulesdir`: path to a directory with custom rules to be added to the built-in rules that come with ESLint. The built-in rules can be found on the [ESLint website](http://eslint.org/docs/rules/). The source for those rules can be found [in the ESLint GitHub repo](https://github.com/eslint/eslint/tree/master/lib/rules).
 * `format`: A pass-through to ESLint's `formatter` setting. The formatter chosen effects how ESLint's output appears on the console. The default, `stylish`, is ESLint's default formatter.
 * `options`: This can be either a string or an object.  If a string it is a path to your ESLint configuration file. The default ESLint configuration can be found [in the ESLint GH](https://github.com/eslint/eslint/blob/master/conf/eslint.json). If `options` is an object it is the actual ESLint configuration inlined in the mimosa-config.
 

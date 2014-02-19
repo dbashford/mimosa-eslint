@@ -73,7 +73,7 @@ exports.validate = function ( config, validators ) {
           }
         }
       } else {
-        if ( typeof es.options !== "object" && !Array.isArray( es.options ) ) {
+        if ( typeof es.options !== "object" ) {
           errors.push( "eslint.options must be a string path or an object" );
         }
       }
