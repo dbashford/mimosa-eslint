@@ -1,6 +1,6 @@
 {
   "name": "mimosa-eslint",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "homepage": "http://www.mimosa.io",
   "author": "David Bashford",
   "description": "A ESLint module for Mimosa",
@@ -23,7 +23,7 @@
     "lint"
   ],
   "dependencies": {
-    "eslint": "0.4.2"
+    "eslint": "0.7.2"
   },
   "main": "./src/index",
   "license": "MIT",
