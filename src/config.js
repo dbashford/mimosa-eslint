@@ -2,6 +2,7 @@
 
 var path = require( "path" )
   , fs = require( "fs" )
+  , YAML = require( "js-yaml" )
   , rules = require( "eslint/lib/rules" )
   , util = require( "eslint/lib/util" )
   , Config = require( "eslint/lib/config" );
@@ -50,7 +51,13 @@ exports.validate = function ( config, validators ) {
           errors.push( "eslint.options string path cannot be found" );
         } else {
           try {
-            es.options = require( fullPath );
+            if ( es.options === '.eslintrc' ) {
+              // .eslintrc files are yaml; parse it as such
+              es.options = YAML.safeLoad(fs.readFileSync(fullPath, 'utf8'));
+            } else {
+              // try to parse as a regular node module or JSON
+              es.options = require( fullPath );
+            }
             if ( !es.options || ( typeof es.options !== "object" || Array.isArray( es.options ) ) ) {
               errors.push( "eslint.options file does not contain an object" );
             }
