@@ -23,7 +23,8 @@
     "lint"
   ],
   "dependencies": {
-    "eslint": "1.4.3"
+    "eslint": "1.4.3",
+    "js-yaml": "^3.4.2"
   },
   "main": "./src/index",
   "license": "MIT",
