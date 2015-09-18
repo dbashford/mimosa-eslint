@@ -18,20 +18,6 @@ exports.defaults = function() {
   };
 };
 
-exports.placeholder = function() {
-  var ph = "  eslint:               # settings for eslint module\n" +
-     "    exclude:[]              # array of strings or regexes that match files to not eslint,\n" +
-     "                            # strings are paths that can be relative to the watch.sourceDir\n" +
-     "                            # or absolute\n" +
-     "    vendor: false           # whether or not to lint vendor scripts\n" +
-     "    rulesdir: null          # path to directory where any additional custom eshint rules exist\n" +
-     "    format: 'stylish'       # name of eslint output formatter\n" +
-     "    options: {}             # options can be a string path relative to the base of the project\n" +
-     "                            # or it can be an object containing all of the eslint rules organized\n" +
-     "                            # like the default rules: https://github.com/eslint/eslint/blob/master/conf/eslint.json\n";
-  return ph;
-};
-
 exports.validate = function ( config, validators ) {
   var errors = []
     , es = config.eslint;

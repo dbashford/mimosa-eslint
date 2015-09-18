@@ -57,6 +57,5 @@ var registration = function (config, register) {
 module.exports = {
   registration: registration,
   defaults: moduleConfig.defaults,
-  placeholder: moduleConfig.placeholder,
   validate: moduleConfig.validate
 };

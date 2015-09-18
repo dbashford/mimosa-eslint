@@ -23,7 +23,7 @@
     "lint"
   ],
   "dependencies": {
-    "eslint": "0.10.2"
+    "eslint": "1.4.3"
   },
   "main": "./src/index",
   "license": "MIT",
