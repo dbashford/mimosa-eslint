@@ -79,7 +79,7 @@ exports.validate = function ( config, validators ) {
       }
 
       if ( errors.length === 0 ) {
-        var validKeys = [ "globals", "env", "rules" ];
+        var validKeys = [ "globals", "env", "rules", "ecmaFeatures", "parser" ];
         Object.keys( es.options ).forEach( function( eslintKey ) {
           if ( validKeys.indexOf( eslintKey ) === -1 ){
             errors.push( "eslint.options contains invalid key " + eslintKey + ". Valid keys are " + validKeys.join( ", " ) );
