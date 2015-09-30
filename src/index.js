@@ -24,10 +24,10 @@ var _process = function ( mimosaConfig, options, next ) {
     var es = mimosaConfig.eslint;
 
     options.files.forEach( function( file ) {
-      var outputText = file.outputFileText
+      var text = es.executeAfterCompile ? file.outputFileText : file.inputFileText
         , fileName = file.inputFileName;
 
-      if ( outputText && outputText.length > 0 ) {
+      if ( text && text.length > 0 ) {
         if ( es.exclude && es.exclude.indexOf( fileName ) !== -1 ) {
           if ( mimosaConfig.log.isDebug() ) {
             mimosaConfig.log.debug( "Not ESLinting [[ " + file.inputFileName + " ]] because it has been excluded via string path." );
@@ -41,7 +41,7 @@ var _process = function ( mimosaConfig, options, next ) {
             mimosaConfig.log.debug( "Not ESLinting vendor script [[ " + fileName + " ]]" );
           }
         } else {
-          _eslint( es, outputText, fileName );
+          _eslint( es, text, fileName );
         }
       }
     });
@@ -51,7 +51,8 @@ var _process = function ( mimosaConfig, options, next ) {
 };
 
 var registration = function (config, register) {
-  register( [ "buildFile", "add", "update"], "afterCompile", _process, config.extensions.javascript );
+  var step = config.eslint.executeAfterCompile ? 'afterCompile' : 'beforeCompile';
+  register( [ "buildFile", "add", "update"], step, _process, config.extensions.javascript );
 };
 
 module.exports = {
