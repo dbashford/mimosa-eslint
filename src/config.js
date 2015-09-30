@@ -14,6 +14,7 @@ exports.defaults = function() {
       vendor: false,
       rulesdir: null,
       format: "stylish",
+      executeAfterCompile: true,
       options: {}
     }
   };
